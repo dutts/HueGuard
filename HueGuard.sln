@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueGuard", "HueGuard\HueGuard.csproj", "{BB41BED0-0703-46C5-BD0E-4A8F11028614}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB41BED0-0703-46C5-BD0E-4A8F11028614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB41BED0-0703-46C5-BD0E-4A8F11028614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB41BED0-0703-46C5-BD0E-4A8F11028614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB41BED0-0703-46C5-BD0E-4A8F11028614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8F29BBF-D862-4C92-91F9-E4C9B55CCA6A}
+	EndGlobalSection
+EndGlobal

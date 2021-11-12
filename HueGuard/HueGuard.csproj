@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Q42.HueApi" />
+    <None Remove="System.Configuration.ConfigurationManager" />
+    <None Remove="Microsoft.Extensions.Hosting" />
+    <None Remove="appsettings.json" />
+    <None Remove="Serilog.Sinks.File" />
+    <None Remove="Serilog" />
+    <None Remove="Serilog.Sinks.Console" />
+    <None Remove="Serilog.AspNetCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Q42.HueApi" Version="3.18.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
