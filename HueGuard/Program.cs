@@ -67,7 +67,7 @@ namespace HueGuard
                     if (!bridges.Any())
                     {
                         Console.WriteLine("No bridge found!");
-                        return;
+                        _appLifetime.StopApplication();
                     }
 
                     var bridge = bridges.First();
@@ -78,7 +78,7 @@ namespace HueGuard
 
                     if (appKey == null || appKey.Length == 0)
                     {
-                        var machineName = System.Environment.MachineName;
+                        var machineName = Environment.MachineName;
                         _logger.Information($"No app key found in config. Registering new client '{machineName}', ensure that link button is pressed on Hue hub.");
 
                         while (appKey?.Length == 0)
@@ -99,15 +99,26 @@ namespace HueGuard
                         client.Initialize(appKey);
                     }
 
-                    Dictionary<string,bool> previousLightsState = null;
+
+                    // Check that all the lights aren't currnetly already on, we have no previous state to return to so error and quit
+                    var lights = await client.GetLightsAsync();
+                    var currentLightsState = lights.ToDictionary(l => l.Id, l => l.State.On);
+
+                    if (currentLightsState.Values.All(status => status == true))
+                    {
+                        _logger.Error("ERROR: All lights are currently on, so have no previous state to guard, turn a light off and try again!");
+                        _appLifetime.StopApplication();
+                    }
+
+                    var previousLightsState = currentLightsState;
                     var previousLightStateCaptureTime = DateTime.MinValue;
 
                     while (!cancellationToken.IsCancellationRequested)
                     {
-                        var lights = await client.GetLightsAsync();
-                        var currentLightsState = lights.ToDictionary(l => l.Id, l => l.State.On);
+                        lights = await client.GetLightsAsync();
+                        currentLightsState = lights.ToDictionary(l => l.Id, l => l.State.On);
 
-                        if (previousLightsState != null && currentLightsState.Values.All(status => status == true))
+                        if (currentLightsState.Values.All(status => status == true))
                         {
                             // ALL the lights are on, probably a problem
                             _logger.Information("All lights on detected, waiting 5 seconds for hue to settle down");
